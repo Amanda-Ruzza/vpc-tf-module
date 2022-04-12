@@ -23,3 +23,23 @@ variable "public_b_cidr"{
     type = string
     description = "The public subnet CIDR for AZ b"
 }
+
+variable "private_a_cidr" {
+  type        = string
+  description = "The Private subnet CIDR for AZ a"
+}
+
+variable "private_b_cidr" {
+  type        = string
+  description = "The Private subnet CIDR for AZ b"
+}
+
+variable "data_a_cidr" {
+  type        = string
+  description = "The Data subnet CIDR for AZ a"
+}
+
+variable "data_b_cidr" {
+  type        = string
+  description = "The Data subnet CIDR for AZ b"
+}
