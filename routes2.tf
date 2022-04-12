@@ -22,17 +22,39 @@ resource "aws_route_table" "internet_route_table" {
   tags = {
     Name = "internet-route-table"
   }
-
 }
 
-# ASSOCIATE ROUTE TABLE -- APP LAYER
-resource "aws_route_table_association" "internet_route_table_association_app" {
-  subnet_id      = aws_subnet.app.id
+# ASSOCIATE ROUTE TABLE -- PRIVATE_a LAYER . This association explains where data needs to go when is associated with a subnet
+resource "aws_route_table_association" "internet_route_table_association_pvt_a" {
+  subnet_id      = aws_subnet.private_a.id
   route_table_id = aws_route_table.nat_route_table.id
 }
 
-# ASSOCIATE ROUTE TABLE -- PUBLIC LAYER
-resource "aws_route_table_association" "internet_route_table_association_public" {
-  subnet_id      = aws_subnet.public.id
+# ASSOCIATE ROUTE TABLE -- PRIVATE_b LAYER
+resource "aws_route_table_association" "internet_route_table_association_pvt_b" {
+  subnet_id      = aws_subnet.private_b.id
+  route_table_id = aws_route_table.nat_route_table.id
+}
+
+# ASSOCIATE ROUTE TABLE -- DATA LAYER
+resource "aws_route_table_association" "internet_route_table_association_data_a" {
+  subnet_id      = aws_subnet.data_a.id
+  route_table_id = aws_route_table.nat_route_table.id
+}
+
+# ASSOCIATE ROUTE TABLE -- DATA LAYER
+resource "aws_route_table_association" "internet_route_table_association_data_b" {
+  subnet_id      = aws_subnet.data_b.id
+  route_table_id = aws_route_table.nat_route_table.id
+}
+
+# ASSOCIATE ROUTE TABLE -- PUBLIC LAYER
+resource "aws_route_table_association" "internet_route_table_association_public_a" {
+  subnet_id      = aws_subnet.public_a.id
+  route_table_id = aws_route_table.internet_route_table.id
+}
+
+resource "aws_route_table_association" "internet_route_table_association_public_b" {
+  subnet_id      = aws_subnet.public_b.id
   route_table_id = aws_route_table.internet_route_table.id
 }
